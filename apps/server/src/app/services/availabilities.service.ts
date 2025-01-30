@@ -7,7 +7,7 @@ export class AvailabilitiesService {
   doctorEvents = events;
   doctorWorkingHours = workingHours;
 
-  public getAvailabilities(from, to): Avalabilities {
+  public getAvailabilities(from: string, to: string): Avalabilities {
     // Filter working hours for the specified days
     const filteredWorkingHours = this.filterWorkingHours(from, to);
     const allFreeSlots = {};
@@ -77,7 +77,7 @@ export class AvailabilitiesService {
     });
   }
 
-  private isNotEmpty(obj): boolean {
+  private isNotEmpty(obj: Avalabilities): boolean {
     return Object.keys(obj).length !== 0;
   }
 }
