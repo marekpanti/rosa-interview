@@ -80,4 +80,28 @@ export class AvailabilitiesService {
   private isNotEmpty(obj: Avalabilities): boolean {
     return Object.keys(obj).length !== 0;
   }
+
+  async fetchAvailabilities(date: string) {
+    console.log(date);
+    const url = `https://staging-api.rosa.be/api/patient-booking/availabilities?key=antoine-staging-pairet&entityType=hp&date=${date}&skip_initial_empty_days=true&site=61379ba159d4940022b6c926&motive=6256d44ed30d2d5a1f2f3c5a&is-new-patient=true`;
+
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Fetched data:', data);
+      return data;
+    } catch (error) {
+      console.error('Error fetching availabilities:', error);
+    }
+  }
 }

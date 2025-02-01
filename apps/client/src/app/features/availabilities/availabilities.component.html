@@ -1,0 +1,24 @@
+<div class="container">
+  @if (!availability) {
+  <div class="slots">
+    @for (day of availabilityFacade.availabilitiesStore(); track $index) {
+    <div class="column">
+      <div class="header">
+        <strong> {{ day.date | date }} </strong>
+      </div>
+      @for (time of day.availabilities; track $index) {
+      <span class="slot" (click)="selectAvailability(time)">{{
+        time.date | date : 'HH:mm'
+      }}</span>
+      }
+    </div>
+    }
+  </div>
+  <button class="load" (click)="fetchMore()">Load More...</button>
+  } @else {
+  <h3>Your selected availability is:</h3>
+  <p>
+    {{ availability.date | date }}, {{ availability.date | date: 'HH:mm' }}
+  </p>
+  }
+</div>
