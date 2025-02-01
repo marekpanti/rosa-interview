@@ -7,9 +7,14 @@
         <strong> {{ day.date | date }} </strong>
       </div>
       @for (time of day.availabilities; track $index) {
-      <span class="slot" (click)="selectAvailability(time)">{{
-        time.date | date : 'HH:mm'
-      }}</span>
+      <div
+        class="slot"
+        tabindex="0"
+        (click)="selectAvailability(time)"
+        (keyup)="selectAvailability(time)"
+      >
+        {{ time.date | date : 'HH:mm' }}
+      </div>
       }
     </div>
     }
@@ -18,7 +23,7 @@
   } @else {
   <h3>Your selected availability is:</h3>
   <p>
-    {{ availability.date | date }}, {{ availability.date | date: 'HH:mm' }}
+    {{ availability.date | date }}, {{ availability.date | date : 'HH:mm' }}
   </p>
   }
 </div>
